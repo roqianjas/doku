@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        color-scheme: light;
+    }
+
+    body {
+        min-height: 100vh;
+        font-family:
+            'Inter Tight',
+            'Space Grotesk',
+            'Segoe UI',
+            sans-serif;
+    }
+
+    ::selection {
+        background: rgb(249 115 22 / 0.22);
+        color: rgb(28 25 23);
+    }
+}
