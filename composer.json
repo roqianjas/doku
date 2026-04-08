@@ -11,7 +11,7 @@
         "laravel/framework": "^13.0",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^3.0",
-        "local/doku-laravel": "dev-main",
+        "roqianjas/doku-laravel": "dev-main",
         "tightenco/ziggy": "^2.0"
     },
     "require-dev": {
@@ -97,3 +97,4 @@
     "minimum-stability": "stable",
     "prefer-stable": true
 }
+

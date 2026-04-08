@@ -18,7 +18,7 @@ Checklist ini dipakai saat `packages/doku-laravel` dipindahkan menjadi repositor
 
 ## 2. Ubah metadata Composer
 
-- Ganti nama package dari `local/doku-laravel` menjadi vendor final Anda, misalnya `your-vendor/doku-laravel`.
+- Pastikan nama package final memang `roqianjas/doku-laravel`, atau ganti lagi jika Anda memilih vendor Composer lain.
 - Tambahkan informasi repository/public package setelah tujuan publish sudah final.
 - Jalankan `composer validate --strict` di repository package.
 
@@ -34,7 +34,7 @@ Checklist ini dipakai saat `packages/doku-laravel` dipindahkan menjadi repositor
 
 - Hapus path repository lokal dari host app jika package sudah dipublish.
 - Ganti dependency host app dari path local ke package Composer biasa.
-- Jalankan `composer update your-vendor/doku-laravel`.
+- Jalankan `composer update roqianjas/doku-laravel`.
 
 ## 5. Ulangi verifikasi integrasi
 
@@ -55,3 +55,6 @@ Checklist ini dipakai saat `packages/doku-laravel` dipindahkan menjadi repositor
 - Pastikan webhook tercatat.
 - Pastikan status internal berubah menjadi `paid`.
 - Uji juga duplicate webhook dan manual status sync.
+
+
+

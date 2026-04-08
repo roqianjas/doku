@@ -1,4 +1,4 @@
-# local/doku-laravel
+# roqianjas/doku-laravel
 
 Reusable Laravel-first integration for DOKU Checkout with Laravel-friendly contracts for checkout creation, status sync, and webhook verification.
 
@@ -23,11 +23,11 @@ Reusable Laravel-first integration for DOKU Checkout with Laravel-friendly contr
 Add the package with Composer, then publish config.
 
 ```bash
-composer require your-vendor/doku-laravel
+composer require roqianjas/doku-laravel
 php artisan vendor:publish --tag=doku-config
 ```
 
-If you are still developing locally from a monorepo or path repository, keep the current path repository setup and require `local/doku-laravel` until the package is moved to its own repository.
+If you are still developing locally from a monorepo or path repository, keep the current path repository setup and require `roqianjas/doku-laravel` until the package is moved to its own repository.
 
 ## Minimal Config
 
@@ -98,8 +98,11 @@ When testing through `localhost.run` or a similar reverse proxy:
 
 Before publishing this package publicly:
 
-1. Rename Composer package `local/doku-laravel` to your real vendor name.
+1. Confirm `roqianjas/doku-laravel` is the final Composer package name you want to publish.
 2. Move `packages/doku-laravel` into its own repository root.
 3. Copy this README and a license file into that repository.
 4. Add CI for unit and feature coverage in an environment with `pdo_sqlite` or MySQL.
 5. Replace path repository usage in host apps with normal Composer installation.
+
+
+
