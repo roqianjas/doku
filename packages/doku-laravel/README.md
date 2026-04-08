@@ -69,6 +69,21 @@ Typical host-app usage:
 - Treat DOKU notifications as retryable and idempotent.
 - Never expose `DOKU_SECRET_KEY` in browser code, screenshots, or client logs.
 
+## Package-local Testing
+
+Once this package lives in its own repository:
+
+```bash
+composer install
+composer test
+```
+
+This repository now includes:
+
+- `phpunit.xml.dist`
+- package-local unit tests under `tests/Unit`
+- a starter GitHub Actions workflow under `.github/workflows/tests.yml`
+
 ## Tunnel And Local Testing Notes
 
 When testing through `localhost.run` or a similar reverse proxy:

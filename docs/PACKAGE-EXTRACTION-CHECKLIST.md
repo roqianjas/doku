@@ -12,6 +12,9 @@ Checklist ini dipakai saat `packages/doku-laravel` dipindahkan menjadi repositor
   - `LICENSE`
   - `config/doku.php`
   - `src/`
+  - `tests/`
+  - `phpunit.xml.dist`
+  - `.github/workflows/tests.yml`
 
 ## 2. Ubah metadata Composer
 
@@ -21,6 +24,8 @@ Checklist ini dipakai saat `packages/doku-laravel` dipindahkan menjadi repositor
 
 ## 3. Siapkan quality gate
 
+- Jalankan `composer install` di repository package.
+- Jalankan `composer test` di repository package.
 - Tambahkan CI untuk menjalankan unit test.
 - Sediakan environment CI yang memiliki `pdo_sqlite` atau MySQL untuk feature test.
 - Pastikan rule linting dan formatting package konsisten.
