@@ -10,6 +10,7 @@ Sample web app berbasis Laravel 13 + Inertia.js + React TSX untuk integrasi DOKU
 - `docs/PRD-doku-demo-app.md` berisi PRD awal.
 - `docs/TECHDESIGN-doku-laravel-package.md` berisi technical design package.
 - `docs/PACKAGE-EXTRACTION-CHECKLIST.md` berisi checklist saat package dipindah ke repository terpisah.
+- `scripts/export-doku-package.ps1` mengekspor package ke folder repo standalone yang siap dipush.
 
 ## Fitur yang sudah ada
 
@@ -152,5 +153,7 @@ DB_PASSWORD=
 - https://developers.doku.com/get-started-with-doku-api/check-status-api/non-snap
 - https://developers.doku.com/get-started-with-doku-api/signature-component/snap
 - https://packagist.org/packages/doku/doku-php-library
+
+
 
 

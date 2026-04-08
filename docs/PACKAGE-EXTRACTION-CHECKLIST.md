@@ -5,6 +5,7 @@ Checklist ini dipakai saat `packages/doku-laravel` dipindahkan menjadi repositor
 ## 1. Siapkan repository baru
 
 - Buat repository baru untuk package.
+- Alternatif tercepat dari repo demo ini: jalankan `scripts/export-doku-package.ps1` untuk mengekspor package ke folder repo standalone.
 - Pindahkan seluruh isi `packages/doku-laravel/` ke root repository baru.
 - Pastikan file berikut ikut terbawa:
   - `composer.json`
@@ -55,6 +56,8 @@ Checklist ini dipakai saat `packages/doku-laravel` dipindahkan menjadi repositor
 - Pastikan webhook tercatat.
 - Pastikan status internal berubah menjadi `paid`.
 - Uji juga duplicate webhook dan manual status sync.
+
+
 
 
 

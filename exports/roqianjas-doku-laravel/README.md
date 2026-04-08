@@ -110,3 +110,19 @@ Before publishing this package publicly:
 4. Add CI for unit and feature coverage in an environment with `pdo_sqlite` or MySQL.
 5. Replace path repository usage in host apps with normal Composer installation.
 
+
+## Publish Workflow
+
+If this folder has been exported into its own repository directory, the usual next steps are:
+
+```bash
+composer install
+composer test
+git init
+git branch -M main
+git add .
+git commit -m "Initial package extraction"
+git remote add origin git@github.com:roqianjas/doku-laravel.git
+git push -u origin main
+```
+
