@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "73a1373ea45cba16147f7d3defd626be",
+    "content-hash": "8927594d7cbbcd8299293bab49d6fde6",
     "packages": [
         {
             "name": "brick/math",
@@ -3436,11 +3436,17 @@
         },
         {
             "name": "roqianjas/doku-laravel",
-            "version": "dev-main",
+            "version": "v0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/roqianjas/doku-laravel.git",
+                "reference": "901eb6b378b00c86a22e8dbbec0e5cc6c5335efc"
+            },
             "dist": {
-                "type": "path",
-                "url": "packages/doku-laravel",
-                "reference": "9df73f5fb06ea82756a3ba0bea5db4b8e88e8a9f"
+                "type": "zip",
+                "url": "https://api.github.com/repos/roqianjas/doku-laravel/zipball/901eb6b378b00c86a22e8dbbec0e5cc6c5335efc",
+                "reference": "901eb6b378b00c86a22e8dbbec0e5cc6c5335efc",
+                "shasum": ""
             },
             "require": {
                 "ext-json": "*",
@@ -3490,10 +3496,11 @@
                 "payment-gateway",
                 "webhook"
             ],
-            "transport-options": {
-                "symlink": false,
-                "relative": true
-            }
+            "support": {
+                "source": "https://github.com/roqianjas/doku-laravel/tree/v0.1.0",
+                "issues": "https://github.com/roqianjas/doku-laravel/issues"
+            },
+            "time": "2026-04-08T07:17:37+00:00"
         },
         {
             "name": "symfony/clock",
@@ -8470,9 +8477,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "roqianjas/doku-laravel": 20
-    },
+    "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

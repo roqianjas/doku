@@ -11,7 +11,7 @@
         "laravel/framework": "^13.0",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^3.0",
-        "roqianjas/doku-laravel": "dev-main",
+        "roqianjas/doku-laravel": "^0.1",
         "tightenco/ziggy": "^2.0"
     },
     "require-dev": {
@@ -78,11 +78,8 @@
     },
     "repositories": [
         {
-            "type": "path",
-            "url": "packages/doku-laravel",
-            "options": {
-                "symlink": false
-            }
+            "type": "vcs",
+            "url": "https://github.com/roqianjas/doku-laravel.git"
         }
     ],
     "config": {

@@ -16,7 +16,7 @@ Sample web app berbasis Laravel 13 + Inertia.js + React TSX untuk integrasi DOKU
 
 - Laravel + Inertia React TSX sudah terpasang.
 - Demo launcher di halaman `/`.
-- Package lokal `roqianjas/doku-laravel` dengan contract `CheckoutService`, `StatusService`, dan `WebhookVerifier`.
+- Package reusable `roqianjas/doku-laravel` dengan contract `CheckoutService`, `StatusService`, dan `WebhookVerifier`.
 - Driver `fake` untuk demo lokal tanpa credential DOKU.
 - Driver `checkout` untuk integrasi HTTP DOKU Checkout.
 - Halaman transaksi, detail transaksi, return page, dan event log.
