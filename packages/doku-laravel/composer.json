@@ -3,11 +3,22 @@
     "description": "Reusable Laravel-first integration for DOKU Checkout.",
     "type": "library",
     "license": "MIT",
+    "keywords": [
+        "laravel",
+        "doku",
+        "payment-gateway",
+        "checkout",
+        "webhook"
+    ],
     "require": {
         "php": "^8.3",
+        "ext-json": "*",
         "illuminate/contracts": "^13.0",
         "illuminate/http": "^13.0",
         "illuminate/support": "^13.0"
+    },
+    "suggest": {
+        "laravel/framework": "Required by host applications that want package auto-discovery and config publishing."
     },
     "autoload": {
         "psr-4": {

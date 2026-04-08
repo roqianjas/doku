@@ -6,8 +6,10 @@ Sample web app berbasis Laravel 13 + Inertia.js + React TSX untuk integrasi DOKU
 
 - `app/` berisi sample host application untuk flow order, payment, webhook, event log, dan sandbox checkout.
 - `packages/doku-laravel/` berisi package reusable untuk integrasi DOKU.
+- `packages/doku-laravel/README.md` berisi panduan package jika nanti dipisah ke project lain.
 - `docs/PRD-doku-demo-app.md` berisi PRD awal.
 - `docs/TECHDESIGN-doku-laravel-package.md` berisi technical design package.
+- `docs/PACKAGE-EXTRACTION-CHECKLIST.md` berisi checklist saat package dipindah ke repository terpisah.
 
 ## Fitur yang sudah ada
 

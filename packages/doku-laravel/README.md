@@ -1,18 +1,35 @@
 # local/doku-laravel
 
-Reusable Laravel-first integration for DOKU Checkout.
+Reusable Laravel-first integration for DOKU Checkout with Laravel-friendly contracts for checkout creation, status sync, and webhook verification.
 
-## Features
+## What This Package Owns
 
-- `CheckoutService` for DOKU Checkout API.
-- `StatusService` for Non-SNAP status sync.
-- `WebhookVerifier` for DOKU notification signature verification.
-- `fake` driver for local demo flow.
-- `checkout` driver for real DOKU gateway flow.
+- DOKU Checkout API request construction and signature generation.
+- Non-SNAP status check request construction.
+- Incoming webhook signature verification.
+- Driver switch between `fake` and real `checkout` modes.
+- Status normalization from DOKU provider states into Laravel app-friendly states.
 
-## Install
+## What The Host App Still Owns
 
-Add the package to a Laravel app and register config values:
+- Order and payment persistence.
+- Route registration for checkout return pages and webhook endpoints.
+- CSRF exemption for the webhook route.
+- Applying verified webhook payloads into your domain models.
+- Trusting proxy headers when the app runs behind public tunnels or reverse proxies.
+
+## Install In Another Laravel App
+
+Add the package with Composer, then publish config.
+
+```bash
+composer require your-vendor/doku-laravel
+php artisan vendor:publish --tag=doku-config
+```
+
+If you are still developing locally from a monorepo or path repository, keep the current path repository setup and require `local/doku-laravel` until the package is moved to its own repository.
+
+## Minimal Config
 
 ```env
 DOKU_DRIVER=checkout
@@ -21,16 +38,53 @@ DOKU_CLIENT_ID=your-client-id
 DOKU_SECRET_KEY=your-secret-key
 DOKU_BASE_URL=https://api-sandbox.doku.com
 DOKU_NOTIFICATION_URL=https://your-domain/webhooks/doku
+DOKU_PAYMENT_DUE_DATE=60
+DOKU_AUTO_REDIRECT=true
+DOKU_PAYMENT_METHOD_TYPES=VIRTUAL_ACCOUNT_BRI
 ```
+
+## Core Services
+
+Resolve these contracts from the Laravel container:
+
+- `DokuLaravel\\Contracts\\CheckoutService`
+- `DokuLaravel\\Contracts\\StatusService`
+- `DokuLaravel\\Contracts\\WebhookVerifier`
+
+Typical host-app usage:
+
+1. Build `CreateCheckoutData` and call `CheckoutService::createCheckout()`.
+2. Save checkout metadata into your local payment record.
+3. Accept `POST /webhooks/doku` in your host app.
+4. Pass headers, raw body, and request path into `WebhookVerifier::parseAndVerify()`.
+5. Apply the normalized status to your own payment aggregate.
+6. Offer `StatusService::checkStatus()` as a manual fallback for delayed notifications.
 
 ## Security Notes
 
-- Exempt your webhook route from Laravel CSRF protection.
-- Verify incoming webhook signature before updating payment status.
-- Match the incoming `Client-Id` header against your configured `DOKU_CLIENT_ID`.
-- Treat the webhook path as POST-only.
+- Exempt only the exact webhook route from Laravel CSRF protection.
+- Keep webhook routes POST-only.
+- Always verify DOKU signature before updating local payment state.
+- Match incoming `Client-Id` with your configured `DOKU_CLIENT_ID`.
+- Treat DOKU notifications as retryable and idempotent.
+- Never expose `DOKU_SECRET_KEY` in browser code, screenshots, or client logs.
 
-## Runtime Notes
+## Tunnel And Local Testing Notes
 
-- For local public testing with tunnels, trust forwarded proxy headers so Laravel generates HTTPS URLs correctly.
-- When using a public tunnel, prefer production asset build instead of `npm run dev`.
+When testing through `localhost.run` or a similar reverse proxy:
+
+- point `APP_URL` and `DOKU_NOTIFICATION_URL` to the active tunnel domain,
+- trust forwarded proxy headers in the host app,
+- use built assets via `npm run build`,
+- do not rely on `npm run dev` for public tunnel testing,
+- keep the tunnel process alive during the payment flow.
+
+## Extraction Notes
+
+Before publishing this package publicly:
+
+1. Rename Composer package `local/doku-laravel` to your real vendor name.
+2. Move `packages/doku-laravel` into its own repository root.
+3. Copy this README and a license file into that repository.
+4. Add CI for unit and feature coverage in an environment with `pdo_sqlite` or MySQL.
+5. Replace path repository usage in host apps with normal Composer installation.
