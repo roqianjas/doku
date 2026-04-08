@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8927594d7cbbcd8299293bab49d6fde6",
+    "content-hash": "7145fb9e19e015a98e6a4a2ab41bef7a",
     "packages": [
         {
             "name": "brick/math",
@@ -3475,30 +3475,21 @@
                     "DokuLaravel\\": "src/"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "DokuLaravel\\Tests\\": "tests/"
-                }
-            },
-            "scripts": {
-                "test": [
-                    "vendor/bin/phpunit -c phpunit.xml.dist"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "description": "Reusable Laravel-first integration for DOKU Checkout.",
             "keywords": [
+                "Doku",
                 "checkout",
-                "doku",
                 "laravel",
                 "payment-gateway",
                 "webhook"
             ],
             "support": {
-                "source": "https://github.com/roqianjas/doku-laravel/tree/v0.1.0",
-                "issues": "https://github.com/roqianjas/doku-laravel/issues"
+                "issues": "https://github.com/roqianjas/doku-laravel/issues",
+                "source": "https://github.com/roqianjas/doku-laravel/tree/v0.1.0"
             },
             "time": "2026-04-08T07:17:37+00:00"
         },
