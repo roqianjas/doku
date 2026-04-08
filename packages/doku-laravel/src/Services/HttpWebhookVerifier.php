@@ -31,6 +31,10 @@ class HttpWebhookVerifier implements WebhookVerifier
             throw new SignatureVerificationException('Missing required DOKU notification headers.');
         }
 
+        if ($clientId !== $this->config->clientId()) {
+            throw new SignatureVerificationException('Unexpected DOKU client id.');
+        }
+
         $digest = $this->signatureGenerator->generateDigest($body);
         $isValid = $this->signatureGenerator->verifySignature(
             $signature,

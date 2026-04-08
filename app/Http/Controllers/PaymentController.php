@@ -110,6 +110,7 @@ class PaymentController extends Controller
             $payment->events()->create([
                 'event_type' => 'status_synced',
                 'source' => 'manual_sync',
+                'provider_request_id' => $status->requestId,
                 'signature_status' => 'not_applicable',
                 'payload' => $status->raw,
                 'processed_at' => now(),

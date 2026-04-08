@@ -76,6 +76,7 @@ class CheckoutController extends Controller
             $payment->events()->create([
                 'event_type' => 'checkout_created',
                 'source' => config('doku.driver') === 'fake' ? 'fake_driver' : 'checkout_api',
+                'provider_request_id' => $checkout->requestId,
                 'signature_status' => 'not_applicable',
                 'payload' => $checkout->raw,
                 'processed_at' => now(),

@@ -18,6 +18,7 @@ Sample web app berbasis Laravel 13 + Inertia.js + React TSX untuk integrasi DOKU
 - Driver `checkout` untuk integrasi HTTP DOKU Checkout.
 - Halaman transaksi, detail transaksi, return page, dan event log.
 - Endpoint webhook `POST /webhooks/doku`.
+- Webhook hardening: verifikasi signature, validasi `Client-Id`, dan idempotency berbasis request id webhook.
 - Sandbox lokal `GET /sandbox/doku/checkout/{order}` untuk simulasi sukses, pending, failed, expired, atau cancelled.
 
 ## Struktur package
@@ -91,6 +92,17 @@ Catatan:
 - `DOKU_NOTIFICATION_URL` harus bisa diakses publik.
 - Return page sample app memakai route `payments.return`.
 - Webhook signature diverifikasi memakai format non-SNAP.
+- Route webhook dikecualikan dari CSRF, tetapi tetap diamankan dengan signature verification DOKU.
+
+### Untuk test lewat tunnel publik
+
+Jika Anda memakai `localhost.run` atau proxy publik sejenis:
+
+- set `APP_URL` dan `DOKU_NOTIFICATION_URL` ke domain tunnel aktif,
+- gunakan `npm run build`, bukan `npm run dev`,
+- pastikan file `public/hot` tidak ada,
+- biarkan tunnel tetap hidup selama test webhook,
+- restart `php artisan serve` dan jalankan `php artisan optimize:clear` setelah mengganti domain.
 
 ## Database
 
@@ -129,6 +141,7 @@ DB_PASSWORD=
 - Status internal dipetakan ke `created`, `pending`, `paid`, `failed`, `expired`, `cancelled`, `refunded`, dan `unknown`.
 - App host menyimpan `orders`, `payments`, dan `payment_events`.
 - Return page tidak menjadi source of truth tunggal; status final tetap mengikuti data internal terbaru.
+- Event log payment sekarang juga menyimpan `provider_request_id` agar request checkout, manual sync, dan webhook lebih mudah diaudit.
 
 ## Referensi resmi DOKU
 

@@ -52,6 +52,7 @@ class FakeDokuCheckoutController extends Controller
         $payment->events()->create([
             'event_type' => 'fake_checkout_status_selected',
             'source' => 'fake_checkout',
+            'provider_request_id' => $payment->request_id,
             'signature_status' => 'local_demo',
             'payload' => [
                 'selected_status' => $validated['status'],

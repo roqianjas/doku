@@ -14,6 +14,7 @@ class PaymentEvent extends Model
         'payment_id',
         'event_type',
         'source',
+        'provider_request_id',
         'payload',
         'signature_status',
         'processed_at',
