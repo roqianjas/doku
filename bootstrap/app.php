@@ -11,6 +11,13 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        // Local tunnels such as localhost.run terminate TLS upstream, so we
+        // trust forwarded proto/host headers to generate correct HTTPS URLs.
+        $middleware->trustProxies(at: '*');
+        $middleware->preventRequestForgery(except: [
+            'webhooks/doku',
+        ]);
+
         $middleware->web(append: [
             \App\Http\Middleware\HandleInertiaRequests::class,
             \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,

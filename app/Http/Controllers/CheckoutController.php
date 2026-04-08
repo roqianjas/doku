@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use DokuLaravel\Contracts\CheckoutService;
 use DokuLaravel\DTO\CreateCheckoutData;
 use DokuLaravel\Exceptions\ConfigurationException;
+use DokuLaravel\Exceptions\GatewayRequestException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -53,7 +54,7 @@ class CheckoutController extends Controller
                 customerEmail: $order->customer_email,
                 callbackUrl: route('payments.return', $order->order_number),
                 callbackUrlResult: route('payments.return', $order->order_number),
-                notificationUrl: route('doku.webhook'),
+                notificationUrl: (string) (config('doku.notification_url') ?: route('doku.webhook')),
                 paymentDueDate: (int) config('doku.payment_due_date', 60),
                 autoRedirect: (bool) config('doku.auto_redirect', true),
                 lineItems: $order->line_items ?? [],
@@ -115,9 +116,7 @@ class CheckoutController extends Controller
                 ]);
             }
 
-            $message = $exception instanceof ConfigurationException
-                ? 'Credential DOKU belum lengkap. Isi variabel DOKU_* di .env atau gunakan driver fake.'
-                : 'Checkout gagal dibuat. Pastikan database dan konfigurasi DOKU sudah siap.';
+            $message = $this->resolveCheckoutErrorMessage($exception);
 
             return back()->with('error', $message);
         }
@@ -138,5 +137,55 @@ class CheckoutController extends Controller
             rescue: null,
             report: false,
         );
+    }
+
+    protected function resolveCheckoutErrorMessage(Throwable $exception): string
+    {
+        if ($exception instanceof ConfigurationException) {
+            return 'Credential DOKU belum lengkap. Isi variabel DOKU_* di .env atau gunakan driver fake.';
+        }
+
+        if ($exception instanceof GatewayRequestException) {
+            $message = $this->extractGatewayMessage($exception->getMessage());
+
+            if ($message['code'] === 'invalid_client_id') {
+                return 'DOKU menolak Client ID. Periksa lagi DOKU_CLIENT_ID dan pastikan credential ini memang aktif untuk DOKU Checkout sandbox.';
+            }
+
+            if ($message['text'] !== null) {
+                return 'Checkout DOKU gagal: '.$message['text'];
+            }
+        }
+
+        return 'Checkout gagal dibuat. Pastikan database dan konfigurasi DOKU sudah siap.';
+    }
+
+    /**
+     * @return array{code: string|null, text: string|null}
+     */
+    protected function extractGatewayMessage(string $message): array
+    {
+        $start = strpos($message, '{');
+
+        if ($start === false) {
+            return [
+                'code' => null,
+                'text' => null,
+            ];
+        }
+
+        $decoded = json_decode(substr($message, $start), true);
+
+        if (! is_array($decoded)) {
+            return [
+                'code' => null,
+                'text' => null,
+            ];
+        }
+
+        return [
+            'code' => data_get($decoded, 'error.code'),
+            'text' => data_get($decoded, 'error.message'),
+        ];
     }
 }
