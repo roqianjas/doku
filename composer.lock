@@ -3436,16 +3436,16 @@
         },
         {
             "name": "roqianjas/doku-laravel",
-            "version": "v0.1.0",
+            "version": "v0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/roqianjas/doku-laravel.git",
-                "reference": "901eb6b378b00c86a22e8dbbec0e5cc6c5335efc"
+                "reference": "a9e42fc6791e9fa153d0d921a18f46dfe4c03c1d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/roqianjas/doku-laravel/zipball/901eb6b378b00c86a22e8dbbec0e5cc6c5335efc",
-                "reference": "901eb6b378b00c86a22e8dbbec0e5cc6c5335efc",
+                "url": "https://api.github.com/repos/roqianjas/doku-laravel/zipball/a9e42fc6791e9fa153d0d921a18f46dfe4c03c1d",
+                "reference": "a9e42fc6791e9fa153d0d921a18f46dfe4c03c1d",
                 "shasum": ""
             },
             "require": {
@@ -3489,9 +3489,9 @@
             ],
             "support": {
                 "issues": "https://github.com/roqianjas/doku-laravel/issues",
-                "source": "https://github.com/roqianjas/doku-laravel/tree/v0.1.0"
+                "source": "https://github.com/roqianjas/doku-laravel/tree/v0.1.1"
             },
-            "time": "2026-04-08T07:17:37+00:00"
+            "time": "2026-04-08T08:01:50+00:00"
         },
         {
             "name": "symfony/clock",
